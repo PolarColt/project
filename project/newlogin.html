@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - BrightTech Solutions</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">BrightTech Solutions</div>
+
+        <nav>
+            <ul>
+			    <li><a href="newlogin.html">Login</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<body>
+
+<form class="form" id="loginForm">
+<link rel="stylesheet" href="loginstyles.css">
+    <!-- Error message container at the top of the form -->
+    <div id="errorContainer" class="error-container"></div>
+
+    <input placeholder="Enter your name" class="input" type="text" id="name" required>
+    <input placeholder="Enter your email" class="input" type="email" id="email" required>
+    <input placeholder="Password" class="input" type="password" id="password" required>
+    
+    <button type="submit" onclick="redirectToHome(event)">Submit</button>
+</form>
+
+<script>
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+
+    function redirectToHome(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorContainer = document.getElementById('errorContainer');
+
+        let errorMessage = "";
+        let isValid = true;
+
+        // Reset error container
+        errorContainer.innerHTML = '';
+        errorContainer.style.display = 'none'; // Hide container initially
+
+        // Check if the name field is filled out
+        if (!name) {
+            errorMessage += "<p>Please enter your name.</p>";
+            isValid = false;
+        }
+
+        // Check if the email field is filled out
+        if (!email) {
+            errorMessage += "<p>Please enter a valid email.</p>";
+            isValid = false;
+        }
+
+        // Check if the password meets length requirement
+        if (password.length < 8) {
+            errorMessage += "<p>Password must be at least 8 characters long.</p>";
+            isValid = false;
+        }
+
+        // Display errors if any, otherwise redirect
+        if (!isValid) {
+            errorContainer.innerHTML = errorMessage;
+            errorContainer.style.display = 'block'; // Show container with error messages
+        } else {
+            document.querySelector("button").innerText = "Loading...";
+            window.location.href = "index.html";
+        }
+    }
+</script>
+
+</body>
+</html>
